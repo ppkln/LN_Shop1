@@ -23,7 +23,13 @@
         textarea:invalid { /* หากไม่ตรงตามเงื่อนไข minlenght และ required จะแสดงเส้นกรอบปะสีแดง */
             border: 2px dashed red;
         }
-
+        .border1{
+            border:1px solid #00008B;
+            padding:5px 20px; 
+            background: #ffffff;
+            border-radius:15px;
+            max-width: 1328px;
+        }
     </style>
 </head>
 <body>
@@ -40,38 +46,38 @@
                         <form id="addUserfrm" action="insertUser.php" method="post" enctype="multipart/form-data" >
                             <div class="mb-3">
                                 <label>E-mail: (ต้องระบุ) </label>
-                                <input type="email" id="email" class="form-control form-control-lg" title="โปรดตรวจสอบความถูกต้องของ E-mail" placeholder="Enter E-mail" required>
+                                <input type="email" id="email" name="email" class="form-control form-control-lg" title="โปรดตรวจสอบความถูกต้องของ E-mail" placeholder="Enter E-mail" required>
                             </div>
                             <div class="mb-3">
                                 <label>เลขประจำตัวประชาชน 13 หลัก: (ต้องระบุ) </label>
-                                <input type="text" id="comp_userId" class="form-control form-control-lg" pattern="^[0-9,-]{13,}$" title="โปรดตรวจสอบความถูกต้องของหมายเลขประจำตัวประชาชน" placeholder="Enter CitizenID" maxlength="13" minlength="13" required>
+                                <input type="text" id="comp_userId" name="comp_userId" class="form-control form-control-lg" pattern="^[0-9,-]{13,}$" title="โปรดตรวจสอบความถูกต้องของหมายเลขประจำตัวประชาชน" placeholder="Enter CitizenID" maxlength="13" minlength="13" required>
                             </div>
                             <div class="mb-3">
                                 <label>ชื่อ: (ต้องระบุ) </label>
-                                <input type="text" id="comp_userFname" class="form-control form-control-lg" pattern="^[ก-๏a-zA-Z]{2,}$" title="โปรดตรวจสอบความถูกต้องของชื่อ" placeholder="Enter First Name" required>
+                                <input type="text" id="comp_userFname" name="comp_userFname" class="form-control form-control-lg" pattern="^[ก-๏a-zA-Z]{2,}$" title="โปรดตรวจสอบความถูกต้องของชื่อ" placeholder="Enter First Name" required>
                             </div>
                             <div class="mb-3">
                                 <label>นามสกุล: (ต้องระบุ) </label>
-                                <input type="text" id="comp_userLname" class="form-control form-control-lg" pattern="^[ก-๏a-zA-Z]{2,}$" title="โปรดตรวจสอบความถูกต้องของนามสกุล" placeholder="Enter Last Name" required>
+                                <input type="text" id="comp_userLname" name="comp_userLname" class="form-control form-control-lg" pattern="^[ก-๏a-zA-Z]{2,}$" title="โปรดตรวจสอบความถูกต้องของนามสกุล" placeholder="Enter Last Name" required>
                             </div>
                             <div class="mb-3">
                                 <label>ที่อยู่: (ต้องระบุ) </label>
-                                <textarea cols="10" rows="3" id="comp_userAddress" class="form-control" minlength="5" placeholder="Enter Address" required></textarea>
+                                <textarea cols="10" rows="3" id="comp_userAddress" name="comp_userAddress" class="form-control" minlength="5" placeholder="Enter Address" required></textarea>
                             </div>
                             <div class="mb-3">
                                 <label>วันเกิด: (ต้องระบุ) </label>
-                                <input type="date" id="comp_userBirthdate">
+                                <input type="date" id="comp_userBirthdate" name="comp_userBirthdate">
                             </div>
                             <div class="mb-3">
                                 <label>เพศ: (ต้องระบุ) </label>
                                 <select name="sex" id="sex" required>
-                                    <option value="Female">หญิง</option>
+                                    <option value="Female" selected >หญิง</option>
                                     <option value="Male">ชาย</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label>หมายเลขมือถือ: </label>
-                                <input type="text" id="comp_userPhone" class="form-control form-control-lg" pattern="^0([6|8|9])([0-9]){8}$" title="โปรดตรวจสอบรูปแบบของหมายเลขมือถือ" placeholder="Enter Mobile Phone" maxlength="10">
+                                <input type="text" id="comp_userPhone" name="comp_userPhone" class="form-control form-control-lg" pattern="^0([6|8|9])([0-9]){8}$" title="โปรดตรวจสอบรูปแบบของหมายเลขมือถือ" placeholder="Enter Mobile Phone" maxlength="10">
                             </div>
                             <div>
                                 <label>รูปภาพ: </label>
@@ -96,16 +102,29 @@
     
     <!-- Edit User Modal End -->
 
-    <div class="container mt-3  ">
-        <div class="row mt-4">
-            <div class="col-lg-12 ">
-                <h1>Welcome to LN Shop1</h1>
+    <div class="container mt-3 border1  ">
+        <div class="row mt-4 ">
+            <div class="col-lg-12">
+                <div class=" text-center">
+                    <h1>ยินดีต้อนรับสู่ระบบ LN Shop1</h1>
+                </div>
+            <div class="mt-2 mb-2">
+                <?php 
+                    echo "วันที่ : ";
+                    $date = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
+                    echo $date->format("d-m-Y H:i:s") . " ตามเวลาประเทศไทย <br>";
+                ?>
+            </div>                
             </div>
             <div class="col-md-6 d-flex justify-center-end">
                 <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addUsermodal">เพิ่มผู้ใช้ใหม่</button>
             </div>
         </div>
         <hr>
+
+        <div>
+            <br><br>
+        </div>
    <!--  -->
     </div>
 </body>
