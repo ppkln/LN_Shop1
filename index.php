@@ -2,6 +2,20 @@
     session_start();
     require_once "config.php";
     
+    $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
+
+    $sql1 = $conn->query("select count(email) as numemail from users")->fetchAll();
+    $allRecord = $sql1[0]['numemail'];
+
+    $perpage = 5; //กำหนดแสดงข้อมูล หน้าละ 5 รายการ
+    $startRow = ($page-1)*$perpage ; //ตำแหน่ง row แรก(จากตารางฐานข้อมูล) ที่จเริ่มนำข้อมูลมาแสดงที่หน้าจอ
+    $totalPage = ceil($allRecord/$perpage); // คำนวณหาจำนวนหน้าทั้งหมดที่จะเกิดขึ้นจากการกำหนด perpage เทียบกับข้อมูลทั้งหมดที่ query ได้
+
+    $sql2 = $conn->query("select * from users limit {$startRow},{$perpage}"); // query ข้อมูลแบบมีการระบุตำแหน่ง row เริ่มต้นและต้องการให้แสดงกี่ row
+    $sql2->execute();
+    $data = $sql2->fetchAll();    
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,8 +134,54 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addUsermodal">เพิ่มผู้ใช้ใหม่</button>
             </div>
         </div>
-        <hr>
 
+        <?php if(isset($_session['success'])){?>
+        <div class="alert alert-success">
+            <?php 
+                echo $_session['success'];
+                unset($_session['success']);
+            ?>
+        </div>
+        <?php } ?>
+
+        <hr>
+        <!-- ส่วนแสดงรายการข้อมูล -->
+        <div style="overflow-x:auto;">
+            <table class="table table-striped table-bordered mt-3 mb-3">
+                <thead class="text-center">
+                    <tr class="table-success">
+                        <th scope="col">email</th>
+                        <th scope="col">ชื่อ</th>
+                        <th scope="col">สกุล</th>
+                        <th scope="col">เพศ</th>
+                        <th scope="col">รูปภาพ</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    if(!$data){
+                        echo "<tr><td class='text-center'>No data of user.</td></tr>";
+                    } else{
+                        foreach($data as $rows){
+                    ?>
+                            <tr>
+                                <td class="text-center"><?= $rows['email']; ?></td>
+                                <td class="text-center"><?= $rows['userFname']; ?></td>
+                                <td class="text-center"><?= $rows['userLname']; ?></td>
+                                <td class="text-center"><?= $rows['sex']; ?></td>
+                                <td width="100px" class="text-center"><img class="rounded" width="100%" src="uploads/userProfile/<?= $rows['userImg'] ?>"></td>
+                                <td class="text-center">
+                                    <a href="editUser.php?email=<?= $rows['email'] ?>" class="btn btn-warning">แก้ไข</a>
+                                    <a href="deleteUser.php?delUser=<?= $rows['userID'] ?>&imgDelUser=<?= $rows['userImg'] ?>" class="btn btn-danger" onclick="return confirm('ต้องการลบข้อมูลผู้ใช้ท่านนี้จริงหรือไม่ ?');">ลบ</a>
+                                </td>
+                            </tr>
+                        <?php 
+                            }
+                    } ?>
+                </tbody>
+            </table>
+        </div>
         <div>
             <br><br>
         </div>
