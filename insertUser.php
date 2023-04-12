@@ -3,20 +3,20 @@ session_start();
 require_once "config.php";
 
 if(isset($_POST['submit'])){
-    $email = strtolower($_POST['email']); //เปลี่ยนชื่อ e-mail เป็นตัวพิมพ์เล็ก
+    $email = strtolower(trim($_POST['email'])); //เปลี่ยนชื่อ e-mail เป็นตัวพิมพ์เล็ก
     $data = "";
     $sql = $conn->query("select * from users where email like '$email'");
     $sql->execute();
     $data = $sql->fetch();
 
     if($data == ""){
-        $userid = $_POST['comp_userId'];
-        $fname = $_POST['comp_userFname'];
-        $lname = $_POST['comp_userLname'];
-        $address = $_POST['comp_userAddress'];
-        $birthDate = $_POST['comp_userBirthdate'];
+        $userid = trim($_POST['comp_userId']);
+        $fname = trim($_POST['comp_userFname']);
+        $lname = trim($_POST['comp_userLname']);
+        $address = strip_tags($_POST['comp_userAddress']);
+        $birthDate = trim($_POST['comp_userBirthdate']);
         $sex = $_POST['sex'];
-        $phone = $_POST['comp_userPhone'];
+        $phone = trim($_POST['comp_userPhone']);
         $img = $_FILES['comp_userImg'];
 
         $date = new DateTime("now", new DateTimeZone('Asia/Bangkok'));//กำหนดโซนเวลาปัจจุบันโดยยึดตามเวลาไทย
