@@ -5,15 +5,15 @@
     $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
 
     $sql1 = $conn->query("select count(email) as numemail from users")->fetchAll();
-    $allRecord = $sql1[0]['numemail'];
+    $allRecord = $sql1[0]['numemail']; // จำนวนแถวทั้งหมดที่ query ได้
 
-    $perpage = 5; //กำหนดแสดงข้อมูล หน้าละ 5 รายการ
-    $startRow = ($page-1)*$perpage ; //ตำแหน่ง row แรก(จากตารางฐานข้อมูล) ที่จเริ่มนำข้อมูลมาแสดงที่หน้าจอ
+    $perpage = 4; //กำหนดแสดงข้อมูล หน้าละ 4 รายการ
+    $startRow = ($page-1)*$perpage ; //ตำแหน่ง row แรก(จากตารางฐานข้อมูล) ที่จะเริ่มนำข้อมูลมาแสดงที่หน้าจอ
     $totalPage = ceil($allRecord/$perpage); // คำนวณหาจำนวนหน้าทั้งหมดที่จะเกิดขึ้นจากการกำหนด perpage เทียบกับข้อมูลทั้งหมดที่ query ได้
 
-    $sql2 = $conn->query("select * from users limit {$startRow},{$perpage}"); // query ข้อมูลแบบมีการระบุตำแหน่ง row เริ่มต้นและต้องการให้แสดงกี่ row
-    $sql2->execute();
-    $data = $sql2->fetchAll();    
+    $data = $conn->query("select * from users ORDER BY regisDate DESC limit {$startRow},{$perpage}")->fetchAll(); // query ข้อมูลแบบมีการระบุตำแหน่ง row เริ่มต้นและต้องการให้แสดงกี่ row
+    //$sql2->execute();
+    //$data = $sql2->fetchAll();    
 
 
 ?>
@@ -118,6 +118,7 @@
 
     <div class="container mt-3 border1  ">
         <div class="row mt-4 ">
+            <div class="col-sm"><a href="http://localhost/LNshop1/index.php"><img src="http://localhost/LNshop1/imgGI/logoMKZ.jpg" class="rounded" width="50px" height="50px" ></a></div>
             <div class="col-lg-12">
                 <div class=" text-center">
                     <h1>ยินดีต้อนรับสู่ระบบ LN Shop1</h1>
@@ -170,7 +171,7 @@
                                 <td class="text-center"><?= $rows['userFname']; ?></td>
                                 <td class="text-center"><?= $rows['userLname']; ?></td>
                                 <td class="text-center"><?= $rows['sex']; ?></td>
-                                <td width="100px" class="text-center"><img class="rounded" width="100%" src="uploads/userProfile/<?= $rows['userImg'] ?>"></td>
+                                <td width="100px" class="text-center"><img class="rounded" width="80%" src="uploads/userProfile/<?= $rows['userImg'] ?>"></td>
                                 <td class="text-center">
                                     <a href="editUser.php?email=<?= $rows['email'] ?>" class="btn btn-warning">แก้ไข</a>
                                     <a href="deleteUser.php?delUser=<?= $rows['userID'] ?>&imgDelUser=<?= $rows['userImg'] ?>" class="btn btn-danger" onclick="return confirm('ต้องการลบข้อมูลผู้ใช้ท่านนี้จริงหรือไม่ ?');">ลบ</a>
@@ -181,6 +182,53 @@
                     } ?>
                 </tbody>
             </table>
+            <!-- คำสั่งแสดงปุ่ม link ไปหน้าต่างๆ -->
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <nav aria-label="pagination-Linkpage-show">
+                        <ul class="pagination justify-content-center">
+                            <li>
+                                <a class="page-link" href="?page=1">First</a>
+                            </li>
+                            <li  <?php if($page ==1){
+                                    echo "class='page-item disabled'";
+                            }  else{
+                                    echo "class='page-item'";
+                            }?>>
+                                <a class="page-link" href="?page=<?=$page-1; ?>" tabindex="-1" aria-label="previous" aria-disabled="true">&laquo;</a>
+                            </li>
+                            <?php if($page <=5 && $page>0 && $page <=$totalPage){?>
+                                <?php for($i=1; $i<=5; $i++){?>
+                                    <li <?php if($i==$page){ echo "class='page-item active'";}else{echo "class='page-item'";} ?> ><a class="page-link" href="?page=<?=$i; ?>"><?=$i ?></a></li>
+                                <?php }?>
+                            <?php }elseif($page>0 && $page <=$totalPage){?>
+                                <?php for($i=0; $i<=4; $i++){
+                                    $i_page = $page+$i;
+                                    if($i_page<=$totalPage){
+                                    ?>
+                                    <li <?php if($i_page==$page){ echo "class='page-item active'";}else{echo "class='page-item'";} ?> ><a class="page-link" href="?page=<?=$i_page; ?>"><?=$i_page ?></a></li>
+                                <?php }
+                                }?>
+                            <?php }?>
+                            <li <?php if($page >=$totalPage){
+                                    echo "class='page-item disabled'";
+                            }  else{
+                                    echo "class='page-item'";
+                            }?>>
+                                <a class="page-link" href="?page=<?=$page+1; ?>" aria-label="next">&raquo;</a>
+                            </li>
+                            <li class="page-item">
+                                <input type="number" class="form-control" min="1" max="<?= $totalPage?>"
+                                        style="width:80px;" onClick="this.select()" onchange="window.location.href = 'index.php?page=' + this.value" value="<?= $page?>" />
+                            </li> 
+                            <li>
+                                <a class="page-link" href="?page=<?= $totalPage ?>">Last</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- สิ้นสุดคำสั่งแสดงปุ่ม link ไปหน้าต่างๆ -->
         </div>
         <div>
             <br><br>
