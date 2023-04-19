@@ -110,13 +110,7 @@
         </div>
     </div>   
     <!-- Add New User Modal End -->
-
-    <!-- Edit User Modal start -->
-
-    
-    <!-- Edit User Modal End -->
-
-    <div class="container mt-3 border1  ">
+    <div class="container mt-3 mb-3 border1  ">
         <div class="row mt-4 ">
             <div class="col-sm"><a href="http://localhost/LNshop1/index.php"><img src="http://localhost/LNshop1/imgGI/logoMKZ.jpg" class="rounded" width="50px" height="50px" ></a></div>
             <div class="col-lg-12">
@@ -173,7 +167,7 @@
                                 <td class="text-center"><?= $rows['sex']; ?></td>
                                 <td width="100px" class="text-center"><img class="rounded" width="80%" src="uploads/userProfile/<?= $rows['userImg'] ?>"></td>
                                 <td class="text-center">
-                                    <a href="editUser.php?email=<?= $rows['email'] ?>" class="btn btn-warning">แก้ไข</a>
+                                    <a href="editUser.php?editUser=<?= $rows['userID'] ?>" class="btn btn-warning">แก้ไข</a>
                                     <a href="deleteUser.php?delUser=<?= $rows['userID'] ?>&imgDelUser=<?= $rows['userImg'] ?>" class="btn btn-danger" onclick="return confirm('ต้องการลบข้อมูลผู้ใช้ท่านนี้จริงหรือไม่ ?');">ลบ</a>
                                 </td>
                             </tr>
