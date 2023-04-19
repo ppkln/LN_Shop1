@@ -101,7 +101,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- คำสั่งที่ทำให้ใช้งาน modal ได้ -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- คำสั่ง Jquery สำหรับ date type ของ textbox ข้อมูลวันเกิด -->
+   
+    <!-- คำสั่ง Jquery สำหรับ date type ของ textbox ข้อมูลวันเกิด 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -110,7 +111,8 @@
             $( "#comp_userBirthdate" ).datepicker();
         } );
     </script>
-    <!-- สิ้นสุดคำสั่ง Jquery สำหรับ date type ของ textbox ข้อมูลวันเกิด -->
+     สิ้นสุดคำสั่ง Jquery สำหรับ date type ของ textbox ข้อมูลวันเกิด -->
+    
     <title>LN Shop1</title>
     <style>
         .container{
@@ -174,7 +176,7 @@
         </div>
         <div class="mb-3">
             <label>วันเกิด: (ต้องระบุ) </label>
-            <input type="text" id="comp_userBirthdate" name="comp_userBirthdate" value="<?= $dataUser['userBirthdate']; ?>">
+            <input type="date" id="comp_userBirthdate" name="comp_userBirthdate" value="<?= $dataUser['userBirthdate']; ?>">
         </div>
         <div class="mb-3">
             <label>เพศ: (ต้องระบุ) </label>
@@ -193,7 +195,7 @@
             <img width="30%" src="uploads/userProfile/<?= $dataUser['userImg']; ?>" id="previewImg" alt="">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-second" data-bs-dismiss="modal">ปิด</button>
+            <button type="button" class="btn btn-warning" onclick="window.location.href='http://localhost/LNshop1/index.php'">ยกเลิก</button>
             <button type="submit" name="submit" id="submit" value="submit" class="btn btn-success" >ตกลง</button>
         </div>
     </form>                       

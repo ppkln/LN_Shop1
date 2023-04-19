@@ -12,9 +12,6 @@
     $totalPage = ceil($allRecord/$perpage); // คำนวณหาจำนวนหน้าทั้งหมดที่จะเกิดขึ้นจากการกำหนด perpage เทียบกับข้อมูลทั้งหมดที่ query ได้
 
     $data = $conn->query("select * from users ORDER BY regisDate DESC limit {$startRow},{$perpage}")->fetchAll(); // query ข้อมูลแบบมีการระบุตำแหน่ง row เริ่มต้นและต้องการให้แสดงกี่ row
-    //$sql2->execute();
-    //$data = $sql2->fetchAll();    
-
 
 ?>
 <!DOCTYPE html>
