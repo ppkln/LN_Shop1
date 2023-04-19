@@ -28,8 +28,8 @@ if(isset($_POST['submit'])){
         };
         $extension = explode('.',$img['name']);//คำสั่งแยกข้อความออกเป็นส่วนๆ โดยใช้เครื่องหมายจุด(.)เป็นเงื่อนไขการแบ่งส่วน
         $fileExt = strtolower(end($extension));//คำสั่งนำข้อความใน array ตัวสุดท้าย มาทำการปรับเป็นอักษรตัวพิมพ์เล็ก
-        $checkExt = array('jpg','jpeg','png');
-        if(in_array($fileExt,$checkExt) && $img !=""){
+        $checkExt = array('jpg','jpeg','png','gif');
+        if(in_array($fileExt,$checkExt) && $img !=''){
             $newFileupload = mktime(date('H'),date('i'),date('s'),date('d'),date('m'),date('Y'))."ppk.".$fileExt; // ตั้งชื่อใหม่ให้ไฟล์ภาพที่เราอัพโหลด ด้วยการประยุกต์ใช้รูปแบบของวันเวลาปัจจุบันมากำหนดเป็นชื่อ
             $filePath = "uploads/userProfile/".$newFileupload;// กำหนด path ตำแหน่งที่ไฟล์อัพโหลดจะถูกนำไปจัดเก็บโดยสร้างโฟล์เดอร์ตามหมายเลขประจำตัวประชาชน
             if($img['size']>0 && $img['error']==0){

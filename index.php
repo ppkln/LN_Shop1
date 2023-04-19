@@ -85,8 +85,8 @@
                             <div class="mb-3">
                                 <label>เพศ: (ต้องระบุ) </label>
                                 <select name="sex" id="sex" required>
-                                    <option value="Female" selected >หญิง</option>
-                                    <option value="Male">ชาย</option>
+                                    <option value="Female" selected >Female</option>
+                                    <option value="Male">Male</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -94,7 +94,7 @@
                                 <input type="text" id="comp_userPhone" name="comp_userPhone" class="form-control form-control-lg" pattern="^0([6|8|9])([0-9]){8}$" title="โปรดตรวจสอบรูปแบบของหมายเลขมือถือ" placeholder="Enter Mobile Phone" maxlength="10">
                             </div>
                             <div>
-                                <label>รูปภาพ: </label>
+                                <label>รูปภาพ: (เฉพาะไฟล์นามสกุล jpg,jpeg,png,gif เท่านั้น) </label>
                                 <input type="file" id="comp_userImg" name="comp_userImg" class="form-control" accept="image/jpeg,image/jpg,image/png,image/gif">
                                 <img width="100%" id="previewImg" alt="">
                             </div>
