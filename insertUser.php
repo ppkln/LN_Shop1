@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
         $userid = trim($_POST['comp_userId']);
         $fname = trim($_POST['comp_userFname']);
         $lname = trim($_POST['comp_userLname']);
-        $address = strip_tags($_POST['comp_userAddress']);
+        $address = strip_tags($_POST['comp_userAddress']);//strip_tag() คือฟังก์ชันสำหรับการลบแท็ก HTML และ PHP ออกจากข้อความสตริง
         $birthDate = trim($_POST['comp_userBirthdate']);
         $sex = $_POST['sex'];
         $phone = trim($_POST['comp_userPhone']);
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
         };
         $extension = explode('.',$img['name']);//คำสั่งแยกข้อความออกเป็นส่วนๆ โดยใช้เครื่องหมายจุด(.)เป็นเงื่อนไขการแบ่งส่วน
         $fileExt = strtolower(end($extension));//คำสั่งนำข้อความใน array ตัวสุดท้าย มาทำการปรับเป็นอักษรตัวพิมพ์เล็ก
-        $checkExt = array('jpg','jpeg','png','gif');
+        $checkExt = array('jpg','jpeg','png','gif','svg','ico');
         if(in_array($fileExt,$checkExt) && $img !=''){
             $newFileupload = mktime(date('H'),date('i'),date('s'),date('d'),date('m'),date('Y'))."ppk.".$fileExt; // ตั้งชื่อใหม่ให้ไฟล์ภาพที่เราอัพโหลด ด้วยการประยุกต์ใช้รูปแบบของวันเวลาปัจจุบันมากำหนดเป็นชื่อ
             $filePath = "uploads/userProfile/".$newFileupload;// กำหนด path ตำแหน่งที่ไฟล์อัพโหลดจะถูกนำไปจัดเก็บโดยสร้างโฟล์เดอร์ตามหมายเลขประจำตัวประชาชน
