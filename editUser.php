@@ -96,7 +96,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpg" href="http://localhost/LNshop1/imgGI/logoMKZ.jpg"><!-- ใส่ icon ที่หัวเว็บไซต์ -->
+    <link rel="icon" type="image/jpg" href="http://localhost/LNshop1/imgGI/logo-nueng1.png"><!-- ใส่ icon ที่หัวเว็บไซต์ -->
     <!-- คำสั่งที่ทำให้ใช้งาน bootstrap ได้ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- คำสั่งที่ทำให้ใช้งาน modal ได้ -->
@@ -134,7 +134,7 @@
 <body>
 <div class="container mt-3 mb-3 border1">
     <div class="row mt-4">
-        <div class="col-sm"><a href="http://localhost/LNshop1/index.php"><img src="http://localhost/LNshop1/imgGI/logoMKZ.jpg" class="rounded" width="50px" height="50px" ></a></div>
+        <div class="col-sm"><a href="http://localhost/LNshop1/index.php"><img src="http://localhost/LNshop1/imgGI/logo-nueng1.png" class="rounded" width="50px" height="50px" ></a></div>
         <div class="col-lg-12">
             <div class="text-center">
                 <h1>ยินดีต้อนรับสู่ระบบ LN Shop1</h1>
